@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://192.168.0.80:3333/',
+  baseURL: 'https://my-json-server.typicode.com/dantxal/rocketshoes-mobile',
 });
 
 export default api;
