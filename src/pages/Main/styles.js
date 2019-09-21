@@ -2,8 +2,8 @@ import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
 export const Loading = styled.ActivityIndicator`
-  color: #fff;
-  size: 48px;
+  align-self: center;
+  justify-self: center;
 `;
 
 export const Container = styled.View`

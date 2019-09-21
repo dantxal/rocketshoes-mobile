@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../services/api';
@@ -23,22 +24,12 @@ class Main extends Component {
     products: [],
   };
 
-  async componentDidMount() {
-    const response = await api.get('/products');
-
-    const data = response.data.map(product => ({
-      ...product,
-      formattedPrice: formatPrice(product.price),
-    }));
-
-    this.setState({ products: data });
-    // this.getProducts();
+  componentDidMount() {
+    this.getProducts();
   }
 
   getProducts = async () => {
-    const response = await api.get('/products').catch(err => {
-      throw err;
-    });
+    const response = await api.get('/products');
 
     const data = response.data.map(product => ({
       ...product,
@@ -48,6 +39,10 @@ class Main extends Component {
     this.setState({ products: data });
   };
 
+  handleAddProduct = () => {
+    const { dispatch } = this.props;
+  };
+
   render() {
     const { loading, products } = this.state;
 
@@ -55,7 +50,7 @@ class Main extends Component {
       <Container>
         <ScrollableContainer>
           {loading ? (
-            <Loading />
+            <Loading size="large" color="#fff" />
           ) : (
             products.map(product => (
               <ItemContainer key={product.id}>
@@ -64,7 +59,9 @@ class Main extends Component {
                 <ProductTitle numberOfLines={2}>{product.title}</ProductTitle>
                 <ProductPrice>{product.formattedPrice} </ProductPrice>
 
-                <AddToCartButton>
+                <AddToCartButton
+                  onPress={() => this.props.navigation.navigate('Cart')}
+                >
                   <CartAmount>
                     <Icon name="shopping-basket" size={24} color="#fff" />
                     <Amount>2</Amount>
@@ -80,4 +77,8 @@ class Main extends Component {
   }
 }
 
-export default Main;
+const mapStateToProps = state => ({
+  cart: state.cart,
+});
+
+export default connect(mapStateToProps)(Main);
