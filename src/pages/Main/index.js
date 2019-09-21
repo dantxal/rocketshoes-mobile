@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../services/api';
 import { formatPrice } from '../../util/format';
@@ -8,6 +9,13 @@ import {
   Container,
   ScrollableContainer,
   ItemContainer,
+  ProductThumbnail,
+  ProductTitle,
+  ProductPrice,
+  AddToCartButton,
+  AddToCartButtonText,
+  CartAmount,
+  Amount,
 } from './styles';
 
 class Main extends Component {
@@ -50,19 +58,19 @@ class Main extends Component {
             <Loading />
           ) : (
             products.map(product => (
-              <ItemContainer>
-                {/* <ProductThumbnail />
-                <ProductTitle>{product.title}</ProductTitle>
-                <ProductPrice>{product.formatPrice} </ProductPrice>
+              <ItemContainer key={product.id}>
+                <ProductThumbnail source={{ uri: product.image }} />
+
+                <ProductTitle numberOfLines={2}>{product.title}</ProductTitle>
+                <ProductPrice>{product.formattedPrice} </ProductPrice>
+
                 <AddToCartButton>
                   <CartAmount>
-                    <Icon />
+                    <Icon name="shopping-basket" size={24} color="#fff" />
                     <Amount>2</Amount>
                   </CartAmount>
-                  <AddToCartButtonText>
-                    ADICIONAR
-                  </AddToCartButtonText>
-                </AddToCartButton> */}
+                  <AddToCartButtonText>ADICIONAR</AddToCartButtonText>
+                </AddToCartButton>
               </ItemContainer>
             ))
           )}
