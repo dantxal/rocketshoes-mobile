@@ -19,6 +19,7 @@ export const ItemContainer = styled.View`
 export const InfoContainer = styled.View`
   flex-direction: row;
   align-items: center;
+  margin-bottom: 10px;
 `;
 
 export const Thumbnail = styled.Image`
@@ -28,7 +29,7 @@ export const Thumbnail = styled.Image`
 export const Details = styled.View`
   flex: 1;
   margin-left: 10px;
-  padding: 10px;
+  padding: 0 10px;
 `;
 export const TitleText = styled.Text`
   font-size: 14;
@@ -37,16 +38,16 @@ export const PriceText = styled.Text`
   font-size: 16;
   font-weight: bold;
 `;
-export const RemoveFromCartButton = styled.View`
+export const RemoveFromCartButton = styled.TouchableOpacity`
   padding: 6px;
 `;
 
 export const SubTotalContainer = styled.View`
+  flex: 1;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  flex: 1;
-  padding: 10px;
+  padding: 7px 10px;
 `;
 export const AmountInputContainer = styled.View`
   flex-direction: row;
@@ -57,11 +58,13 @@ export const AmountText = styled.TextInput.attrs({
   readOnly: true,
 })`
   background: #fff;
-  padding: 5px;
   margin: 0 5px;
   border: 1px solid #ddd;
   border-radius: 4px;
   min-width: 52px;
+  padding: 5px 12px;
+  font-size: 14px;
+  line-height: 16px;
 `;
 export const SubTotalText = styled.Text`
   font-weight: bold;
@@ -71,7 +74,7 @@ export const SubTotalText = styled.Text`
 `;
 
 export const TotalText = styled.Text`
-  margin-top: 30px;
+  margin-top: auto;
   margin-bottom: 5px;
   font-size: 16;
   font-weight: bold;
@@ -88,11 +91,11 @@ export const FinishOrderButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   padding: 13px;
-  margin: auto 10px 10px;
   border-radius: 4px;
 `;
 export const FinishOrderButtonText = styled.Text`
   color: #fff;
   font-size: 14;
   font-weight: bold;
+  margin: 0;
 `;
