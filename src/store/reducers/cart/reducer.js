@@ -3,6 +3,7 @@ import produce from 'immer';
 export default function cart(state = [], action) {
   switch (action.type) {
     case '@cart/ADD_SUCCESS':
+      console.tron.log(`Add product ${action.product}`);
       return produce(state, draft => {
         const { product } = action;
         draft.push(product);

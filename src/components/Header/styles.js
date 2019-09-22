@@ -9,6 +9,7 @@ export const SafeView = styled.SafeAreaView`
   flex: 0;
   background: ${colors.dark};
   flex-direction: row;
+  margin-bottom: 64px;
 `;
 export const Container = styled.View`
   flex-direction: row;

@@ -8,8 +8,7 @@ export const Loading = styled.ActivityIndicator`
 
 export const Container = styled.View`
   flex-direction: row;
-  margin-top: 60px;
-  padding: 10px;
+  margin: 15px 0;
 `;
 
 export const ScrollableContainer = styled.ScrollView.attrs({

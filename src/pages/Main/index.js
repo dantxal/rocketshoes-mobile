@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../services/api';
+import { addToCart } from '../../store/reducers/cart/actions';
 import { formatPrice } from '../../util/format';
 
 import {
@@ -39,8 +40,16 @@ class Main extends Component {
     this.setState({ products: data });
   };
 
-  handleAddProduct = () => {
+  handleAddProduct = id => {
     const { dispatch } = this.props;
+    const { products } = this.state;
+
+    dispatch({
+      type: '@cart/ADD_REQUEST',
+      product: products[id],
+    });
+
+    this.props.navigation.navigate('Cart');
   };
 
   render() {
@@ -60,7 +69,7 @@ class Main extends Component {
                 <ProductPrice>{product.formattedPrice} </ProductPrice>
 
                 <AddToCartButton
-                  onPress={() => this.props.navigation.navigate('Cart')}
+                  onPress={() => this.handleAddProduct(product.id)}
                 >
                   <CartAmount>
                     <Icon name="shopping-basket" size={24} color="#fff" />

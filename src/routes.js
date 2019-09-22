@@ -18,6 +18,7 @@ const Routes = createAppContainer(
       defaultNavigationOptions: navigation => ({
         // eslint-disable-next-line react/jsx-props-no-spreading
         header: <Header {...navigation} />,
+        headerMode: 'none',
       }),
       cardStyle: {
         backgroundColor: colors.dark,
