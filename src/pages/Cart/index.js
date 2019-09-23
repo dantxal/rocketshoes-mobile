@@ -24,8 +24,16 @@ import {
 } from './styles';
 
 import * as CartActions from '../../store/modules/cart/actions';
+import { formatPrice } from '../../util/format';
 
-function Cart({ cart, removeFromCart }) {
+function Cart({ cart, removeFromCart, updateAmountRequest, total }) {
+  function increment(product) {
+    updateAmountRequest(product.id, product.amount + 1);
+  }
+  function decrement(product) {
+    updateAmountRequest(product.id, product.amount - 1);
+  }
+
   return (
     <Container>
       {cart.map(product => (
@@ -46,21 +54,21 @@ function Cart({ cart, removeFromCart }) {
           </InfoContainer>
           <SubTotalContainer>
             <AmountInputContainer>
-              <AmountButton>
+              <AmountButton onPress={() => decrement(product)}>
                 <Icon name="remove-circle-outline" size={20} color="#7159c1" />
               </AmountButton>
               <AmountText>{product.amount}</AmountText>
-              <AmountButton>
+              <AmountButton onPress={() => increment(product)}>
                 <Icon name="add-circle-outline" size={20} color="#7159c1" />
               </AmountButton>
             </AmountInputContainer>
-            <SubTotalText>R$539.70</SubTotalText>
+            <SubTotalText>{product.subTotal}</SubTotalText>
           </SubTotalContainer>
         </ItemContainer>
       ))}
 
       <TotalText>TOTAL</TotalText>
-      <TotalPriceText>R$ 1619.10</TotalPriceText>
+      <TotalPriceText>{total}</TotalPriceText>
       <FinishOrderButton>
         <FinishOrderButtonText>FINALIZAR PEDIDO</FinishOrderButtonText>
       </FinishOrderButton>
@@ -69,7 +77,15 @@ function Cart({ cart, removeFromCart }) {
 }
 
 const mapStateToProps = state => ({
-  cart: state.cart,
+  cart: state.cart.map(product => ({
+    ...product,
+    subTotal: formatPrice(product.price * product.amount),
+  })),
+  total: formatPrice(
+    state.cart.reduce((total, product) => {
+      return total + product.price * product.amount;
+    }, 0)
+  ),
 });
 
 const mapDispatchToProps = dispatch =>

@@ -53,7 +53,7 @@ export const AmountInputContainer = styled.View`
   flex-direction: row;
   align-items: center;
 `;
-export const AmountButton = styled.View``;
+export const AmountButton = styled.TouchableOpacity``;
 export const AmountText = styled.TextInput.attrs({
   readOnly: true,
 })`
